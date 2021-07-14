@@ -1,6 +1,3 @@
-from requests import NullHandler
-
-
 num_list = list()
 
 def main():

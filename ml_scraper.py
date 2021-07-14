@@ -14,6 +14,7 @@ def process_page(url: str, csv_w: csv):
     for item in items_result:
         title = item.find("h2", class_="ui-search-item__title").text.strip()
         link = item.find("a", class_="ui-search-item__group__element ui-search-link")['href']
+        link = link[0:link.find('?')]
         price = item.find("span", class_="price-tag-fraction").text.strip()
         price = price.replace('.','')
         print(title, end=" : ")
@@ -26,7 +27,7 @@ url = "https://listado.mercadolibre.com.ar/"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('search', default='telefonos-celulares')
-parser.add_argument('-url', , action='store_true')
+parser.add_argument('-url', action='store_true')
 parser.add_argument('-p_min', type=int, default=0)
 parser.add_argument('-p_max', type=int, default=0)
 parser.add_argument('-new', action='store_true')
@@ -52,7 +53,7 @@ csv_w = csv.writer(file_out)
 
 
 print(url)
-#process_page(url, csv_w)
+process_page(url, csv_w)
 
 if args.depth >> 0:
     for i in range(args.depth):
